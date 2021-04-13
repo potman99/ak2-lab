@@ -1,0 +1,14 @@
+Zadanie na dzisiejsze laboratorium to przygotowanie programów w asemblerze (modyfikacja kodu z wzorcowego sprawozdania)
+tak, aby program:
+1. odwracał kolejność znaków napisu umieszczonego w pamięci kodu napisu względem środka napisu np.
+alamakota -> atokamala i wyświetlał wynik na standardowe wyjście.
+
+2. zamiana znaków w napisie z małych na wielkie litery i odwrotnie np.
+Ala-Ma-Kota -> aLA-mA-kOTA i wyświetlał wynik na standardowe wyjście.
+
+3. Napis analizowany w punkcie 1 i 2 pobierany był ze standardowego wejścia za pomocą funkcji systemowej read (wywołanie systemowe).
+
+Proszę ponadto na kolejne zajęcia poczytać o wywołaniach bibliotecznych rozdział 3.2 w
+https://software.intel.com/sites/default/files/article/402129/mpx-linux64-abi.pdf
+https://en.wikipedia.org/wiki/Calling_convention#x86_(32-bit)
+
