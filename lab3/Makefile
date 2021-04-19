@@ -1,11 +1,7 @@
-z1: z1.o
-	ld z1.o -m elf_i386 -o z1
-
-z1.o: z1.s
-	as z1.s --32 -o z1.o -g
-
+z1:
+	gcc -O3 -Wall -m32 -g z1.s -o  z1
 
 all: z1
 
 clean:
-	rm z1 *.o
+	rm z1 
