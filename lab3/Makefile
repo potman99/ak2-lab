@@ -5,7 +5,7 @@ z1.o: z1.s
 	as z1.s --32 -o z1.o -g
 
 
-all: z1 
+all: z1
 
 clean:
-	rm z1  *.o 
+	rm z1 *.o

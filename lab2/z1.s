@@ -5,9 +5,8 @@ SYSREAD = 3
 SYSWRITE = 4
 
 .section .data
-    firstNr: .long 0xffffffff, 0x701100FF, 0x45100020, 0x08570030, 0x00220026, 0x321000CB, 0x321000CB, 0x04520031, 0x2a7fcf51, 0x1e78103e, 0xdcfdb92c, 0x8e5c3d92, 0x08570030, 0x45100020, 0x08570030, 0xffffffff
-    secondNr: .long 0x10304008, 0x701100FF, 0x45100020, 0x08570030, 0x00220026, 0x321000CB, 0x321000CB, 0x04520031, 0x2a7fcf51, 0x1e78103e, 0xdcfdb92c, 0x8e5c3d92, 0x08570030, 0x45100020, 0x08570030, 0x10304008
-    numberLenght: .long 0x200
+    firstNr: .long 0x00000001,0xffffffff, 0x701100FF, 0xffffffff, 0x08570030, 0x00220026, 0x321000CB, 0x321000CB, 0x04520031, 0x2a7fcf51, 0x1e78103e, 0xdcfdb92c, 0x8e5c3d92, 0x08570030, 0x45100020, 0x08570030, 0xffffffff
+    secondNr: .long 0x00000001, 0xffffffff, 0x45100020, 0x08570030, 0x00220026, 0x321000CB, 0x321000CB, 0x04520031, 0x2a7fcf51, 0x1e78103e, 0xdcfdb92c, 0x8e5c3d92, 0x08570030, 0x45100020, 0x08570030, 0x10304008
     counter: .int 16
 
 .section .bss
@@ -21,17 +20,22 @@ _start:
 # esi - loop iterator
 xor %esi, %esi
 
+
+
+mainLoop:
+
 popf
 clc
 pushf
-
-mainLoop:
 
 movl firstNr(,%esi,4), %eax
 addl secondNr(,%esi,4), %eax
 pushf
 
-movl %eax, result(,%esi,4)
+
+addl %eax, result(,%esi,4)
+
+
 
 movl %esi, %ebx
 inc %ebx
@@ -40,10 +44,10 @@ carryLoop:
 popf
 jnc carryLoopEnd
 # copy main iterator
-xor %ecx, %ecx
-adc $0, %ch
+adcl $0 ,result(,%ebx,4)
 pushf
-mov %ch, result(%ebx)
+
+movl result(,%ebx,4), %eax
 jmp carryLoop
 
 
@@ -52,7 +56,7 @@ carryLoopEnd:
 
 
 inc %esi
-cmp numberLenght, %esi
+cmp counter, %esi
 jl mainLoop
 
 
