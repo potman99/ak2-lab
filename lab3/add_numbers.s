@@ -5,9 +5,9 @@
     firstNr: .long 0x00000001,0xffffffff, 0x701100FF, 0xffffffff, 0x08570030, 0x00220026, 0x321000CB, 0x321000CB, 0x04520031, 0x2a7fcf51, 0x1e78103e, 0xdcfdb92c, 0x8e5c3d92, 0x08570030, 0x45100020, 0x08570030, 0xffffffff
     secondNr: .long 0x00000001, 0xffffffff, 0x45100020, 0x08570030, 0x00220026, 0x321000CB, 0x321000CB, 0x04520031, 0x2a7fcf51, 0x1e78103e, 0xdcfdb92c, 0x8e5c3d92, 0x08570030, 0x45100020, 0x08570030, 0x10304008
     counter: .int 16
-    display_string: .ascii "%X  "
+    display_string: .ascii "%d  "
 
-    .lcomm result, 513
+    .lcomm result, 544
 
 AddNumbers:
 
@@ -52,6 +52,7 @@ xor %ebx, %ebx
 
 
 displayLoop:
+
 movl result(,%ebx,4), %eax
 pushl %eax
 pushl $display_string
@@ -59,7 +60,7 @@ call printf
 add $8, %esp
 
 inc %ebx
-cmp counter, %ebx
+cmp $17, %ebx
 jl displayLoop
 
 
